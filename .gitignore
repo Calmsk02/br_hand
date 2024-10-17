@@ -1,0 +1,8 @@
+# IGNORE FILE #
+src/br_hand/gui/__pycache__
+src/br_hand/gui/template.ui
+src/br_hand/gui/__pycache__
+src/br_hand/hand/__pycache__
+src/br_hand/utils/__pycache__
+thirdparty
+.log

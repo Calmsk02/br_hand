@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="br_hand" type="node_manager.py" name="br_hand_nodes" output="screen"/>
+</launch>

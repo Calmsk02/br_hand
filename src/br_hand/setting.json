@@ -1,0 +1,44 @@
+{
+    "__copyright__": "Bluerobin inc.",
+    "__author__": "Minsu Kim < minsu309@bluerobin.co.kr, minsu309@snu.ac.kr >",
+    "__how_to_write__": [   "1. name port.",
+                            "2. write the 'id' and 'type' of motors connected to the port.",
+                            "   see 'Motor SERIES' in 'br_dxl_protocol.py' file. ",
+                            "3. choose motor control mode : 0 for torque 5 for position",
+                            "   see 'Operating mode' in 'br_dxl_protocol.py' file. " ],
+
+
+    "port": ["/dev/ttyUSB0"],
+
+    "motor_id": [[31, 32, 33, 34, 35, 36, 37, 38]],
+    
+    "motor_type": [["XC330-T288","XC330-T181","XC330-T288","XC330-T181","XC330-T288","XC330-T181","XC330-T288","XC330-T181"]],
+
+    "motor_mode": [[0,0,0,0,0,0,0,0]],
+
+    "description": ["br_hand"],
+
+    "gain":
+    {
+        "thumb"     :   {"ABD": {"kp": 0, "kv": 0}, "FE":{"kp": 0, "kv": 0}},
+        "index"     :   {"ABD": {"kp": 0, "kv": 0}, "FE": {"kp": 0, "kv": 0}},
+        "middle"    :   {"ABD": {"kp": 0, "kv": 0}, "FE": {"kp": 0, "kv": 0}},
+        "ring"      :   {"ABD": {"kp": 0, "kv": 0}, "FE": {"kp": 0, "kv": 0}}
+    },
+
+    "control":
+    {
+        "thumb"     :   {"ABD": {"mode": 0, "val": 0}, "FE": {"mode": 0, "val": 0}},
+        "index"     :   {"ABD": {"mode": 0, "val": 0}, "FE": {"mode": 0, "val": 0}},
+        "middle"    :   {"ABD": {"mode": 0, "val": 0}, "FE": {"mode": 0, "val": 0}},
+        "ring"      :   {"ABD": {"mode": 0, "val": 0}, "FE": {"mode": 0, "val": 0}}
+    },
+
+    "min_max_radian":
+    {
+        "thumb"     :   {"ABD": {"min": 1.89, "max": 3.87}, "FE": {"min": -0.15, "max": 4.98}},
+        "index"     :   {"ABD": {"min": 1.86, "max": 4.27}, "FE": {"min": -2.32, "max": 4.14}},
+        "middle"    :   {"ABD": {"min": 2.63, "max": 4.30}, "FE": {"min": -5.39, "max": 1.02}},
+        "ring"      :   {"ABD": {"min": 2.64, "max": 4.58}, "FE": {"min": -0.31, "max": 6.12}}
+    }
+}
