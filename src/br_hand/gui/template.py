@@ -876,7 +876,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "BRHand Controller"))
-        self.title.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">BRHand Controller v1.0</span></p></body></html>"))
+        self.title.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">BRHand Controller v1.0.1</span></p></body></html>"))
         self.push_connect.setText(_translate("MainWindow", "ROS Connect"))
         self.label_status.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Not Connected</p></body></html>"))
         self.label_2.setText(_translate("MainWindow", "Status :"))

@@ -14,7 +14,7 @@ from br_hand.utils.utilities import get_rosparam_name, dict2list, BRLogger
 from br_hand.hand.br_dxl_protocol import BR_CMD_TYPE
 import sys, json, os
 
-ADVANCED = False
+ADVANCED = True
 
 class RosListner(QThread):
     message_received = pyqtSignal(MotorInfo)
@@ -242,6 +242,8 @@ class BrGui(Ui_MainWindow):
         self.push_plus.clicked.connect(lambda: self.f_push_strength(4))
         self.push_grip.pressed.connect(self.f_push_grip)
         self.push_release.pressed.connect(self.f_push_release)
+        self.push_grip.released.connect(self.f_push_zero)
+        self.push_release.released.connect(self.f_push_zero)
         self.push_zero.pressed.connect(self.f_push_zero)
         self.push_reset.clicked.connect(self.f_push_reset)
         
@@ -388,9 +390,18 @@ class BrGui(Ui_MainWindow):
         if self.check_target4.isChecked():
             checked_list.append(7)    
         return checked_list
+    
+    def modeCheck(self):
+        for i in range(4):
+            if self.combo_modes[2*i+1].currentIndex() != 0:
+                self.log(f"Mode should be \"Current\" for flex./ext. fingers\n")
+                return 0
+        return 1
             
     def f_push_grip(self):
         checked_list = self.gripCheck()
+        if not self.modeCheck():
+            return
         for i in checked_list:
             min_val = float(self.min_vals[i].text())
             interval = float(self.max_vals[i].text())-min_val
@@ -398,7 +409,9 @@ class BrGui(Ui_MainWindow):
             self.sliders[i].setValue(int(value))
                 
     def f_push_zero(self):
-        checked_list = self.gripCheck()   
+        checked_list = self.gripCheck()
+        if not self.modeCheck():
+            return
         for i in checked_list:
             min_val = float(self.min_vals[i].text())
             interval = float(self.max_vals[i].text())-min_val
@@ -406,7 +419,9 @@ class BrGui(Ui_MainWindow):
             self.sliders[i].setValue(int(value))
     
     def f_push_release(self):
-        checked_list = self.gripCheck()   
+        checked_list = self.gripCheck()
+        if not self.modeCheck():
+            return
         for i in checked_list:
             min_val = float(self.min_vals[i].text())
             interval = float(self.max_vals[i].text())-min_val
