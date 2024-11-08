@@ -27,6 +27,7 @@ def main():
                data["motor_mode"],
                data["description"])
     
+    # Ros param setup
     rosparam.set_param('port', str(data["port"]))
     rosparam.set_param('gain', str(data["gain"]))
     rosparam.set_param('control', str(data["control"]))
@@ -37,6 +38,7 @@ def main():
         val = data["motor_mode"][0][i]
         rosparam.set_param(param_name, str(val))
     
+    # ROS Service callback function
     def sevice_callback(req):
         dxl_id = data["motor_id"][0][req.index]
         if req.cmd_type == (BR_CMD_TYPE.CONNECT.value):
@@ -50,10 +52,11 @@ def main():
         return MotorCMDResponse(ret)
     
     try:
+        # Ros initialization
         rospy.init_node("BRHand", anonymous=True)
         rate = rospy.Rate(30)
         server = rospy.Service('motor_command', MotorCMD, sevice_callback)
-        server
+        server # not used (avoid warning)
         publisher = rospy.Publisher('/motor', MotorInfo, queue_size=10)
         
         while not rospy.is_shutdown():
@@ -73,14 +76,14 @@ def main():
            
             # write data
             for i in range(8):
-                if control_param[2*i] == 5:
-                    hand.position[0][i] = control_param[2*i+1]
-                elif control_param[2*i] == 0:
-                    hand.current[0][i] = control_param[2*i+1]
+                if control_param[2*i] == 5:                     # check if ctrl mode is position
+                    hand.position[0][i] = control_param[2*i+1]  # update position command
+                elif control_param[2*i] == 0:                   # check if ctrl mode is current
+                    hand.current[0][i] = control_param[2*i+1]   # update current command
                 elif control_param[2*i] == "PD":
                     continue
                     
-            hand.write()
+            hand.write() # bulk write (ref: dynamixel sdk)
             rate.sleep()
 
     except rospy.ROSInterruptException:
