@@ -12,3 +12,6 @@ pip3 install PyQt5
 
 4. json (if not installed)
 pip3 install json
+
+5. serial (if not installed)
+pip3 install pyserial
